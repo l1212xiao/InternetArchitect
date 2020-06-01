@@ -21,27 +21,25 @@ import java.util.Map;
 public class TestRedis {
 
     @Autowired
-    RedisTemplate  redisTemplate;
+    RedisTemplate redisTemplate;
 
     @Autowired
     @Qualifier("ooxx")
-    StringRedisTemplate  stringRedisTemplate;
+    StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    ObjectMapper  objectMapper;
+    ObjectMapper objectMapper;
 
+    public void testRedis() {
 
-    public void testRedis(){
+        //高阶api
+        stringRedisTemplate.opsForValue().set("hello01", "china");
+        System.out.println(stringRedisTemplate.opsForValue().get("hello01"));
 
-
-
-//        stringRedisTemplate.opsForValue().set("hello01","china");
-//
-//        System.out.println(stringRedisTemplate.opsForValue().get("hello01"));
-
+        //低阶api
         RedisConnection conn = redisTemplate.getConnectionFactory().getConnection();
 
-        conn.set("hello02".getBytes(),"mashibing".getBytes());
+        conn.set("hello02".getBytes(), "mashibing".getBytes());
         System.out.println(new String(conn.get("hello02".getBytes())));
 
 
@@ -60,7 +58,7 @@ public class TestRedis {
 
         Jackson2HashMapper jm = new Jackson2HashMapper(objectMapper, false);
 
-        stringRedisTemplate.opsForHash().putAll("sean01",jm.toHash(p));
+        stringRedisTemplate.opsForHash().putAll("sean01", jm.toHash(p));
 
         Map map = stringRedisTemplate.opsForHash().entries("sean01");
 
@@ -68,7 +66,7 @@ public class TestRedis {
         System.out.println(per.getName());
 
 
-        stringRedisTemplate.convertAndSend("ooxx","hello");
+        stringRedisTemplate.convertAndSend("ooxx", "hello");
 
         RedisConnection cc = stringRedisTemplate.getConnectionFactory().getConnection();
         cc.subscribe(new MessageListener() {
@@ -79,8 +77,9 @@ public class TestRedis {
             }
         }, "ooxx".getBytes());
 
-        while(true){
-            stringRedisTemplate.convertAndSend("ooxx","hello  from wo zi ji ");
+        // PUBLISH ooxx hello
+        while (true) {
+            stringRedisTemplate.convertAndSend("ooxx", "hello  from wo zi ji ");
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
@@ -91,10 +90,6 @@ public class TestRedis {
 
 
     }
-
-
-
-
 
 
 }
