@@ -11,9 +11,9 @@ import java.util.concurrent.CountDownLatch;
  * @author: 马士兵教育
  * @create: 2019-09-20 21:26
  */
-public class WatchCallBack   implements Watcher, AsyncCallback.StringCallback ,AsyncCallback.Children2Callback ,AsyncCallback.StatCallback {
+public class WatchCallBack implements Watcher, AsyncCallback.StringCallback, AsyncCallback.Children2Callback, AsyncCallback.StatCallback {
 
-    ZooKeeper zk ;
+    ZooKeeper zk;
     String threadName;
     CountDownLatch cc = new CountDownLatch(1);
     String pathName;
@@ -42,12 +42,12 @@ public class WatchCallBack   implements Watcher, AsyncCallback.StringCallback ,A
         this.zk = zk;
     }
 
-    public void tryLock(){
+    public void tryLock() {
         try {
 
             System.out.println(threadName + "  create....");
-//            if(zk.getData("/"))
-            zk.create("/lock",threadName.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL,this,"abc");
+            // if(zk.getData("/"))
+            zk.create("/lock", threadName.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL, this, "abc");
 
             cc.await();
         } catch (InterruptedException e) {
@@ -55,9 +55,9 @@ public class WatchCallBack   implements Watcher, AsyncCallback.StringCallback ,A
         }
     }
 
-    public void unLock(){
+    public void unLock() {
         try {
-            zk.delete(pathName,-1);
+            zk.delete(pathName, -1);
             System.out.println(threadName + " over work....");
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -70,7 +70,6 @@ public class WatchCallBack   implements Watcher, AsyncCallback.StringCallback ,A
     @Override
     public void process(WatchedEvent event) {
 
-
         //如果第一个哥们，那个锁释放了，其实只有第二个收到了回调事件！！
         //如果，不是第一个哥们，某一个，挂了，也能造成他后边的收到这个通知，从而让他后边那个跟去watch挂掉这个哥们前边的。。。
         switch (event.getType()) {
@@ -79,7 +78,7 @@ public class WatchCallBack   implements Watcher, AsyncCallback.StringCallback ,A
             case NodeCreated:
                 break;
             case NodeDeleted:
-                zk.getChildren("/",false,this ,"sdf");
+                zk.getChildren("/", false, this, "sdf");
                 break;
             case NodeDataChanged:
                 break;
@@ -91,10 +90,10 @@ public class WatchCallBack   implements Watcher, AsyncCallback.StringCallback ,A
 
     @Override
     public void processResult(int rc, String path, Object ctx, String name) {
-        if(name != null ){
-            System.out.println(threadName  +"  create node : " +  name );
-            pathName =  name ;
-            zk.getChildren("/",false,this ,"sdf");
+        if (name != null) {
+            System.out.println(threadName + "  create node : " + name);
+            pathName = name;
+            zk.getChildren("/", false, this, "sdf");
         }
 
     }
@@ -115,11 +114,11 @@ public class WatchCallBack   implements Watcher, AsyncCallback.StringCallback ,A
 
 
         //是不是第一个
-        if(i == 0){
+        if (i == 0) {
             //yes
-            System.out.println(threadName +" i am first....");
+            System.out.println(threadName + " i am first....");
             try {
-                zk.setData("/",threadName.getBytes(),-1);
+                zk.setData("/", threadName.getBytes(), -1);
                 cc.countDown();
 
             } catch (KeeperException e) {
@@ -127,9 +126,9 @@ public class WatchCallBack   implements Watcher, AsyncCallback.StringCallback ,A
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             //no
-            zk.exists("/"+children.get(i-1),this,this,"sdf");
+            zk.exists("/" + children.get(i - 1), this, this, "sdf");
         }
 
     }

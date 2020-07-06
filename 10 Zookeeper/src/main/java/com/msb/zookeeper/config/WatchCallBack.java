@@ -12,10 +12,10 @@ import java.util.concurrent.CountDownLatch;
  * @author: 马士兵教育
  * @create: 2019-09-20 20:21
  */
-public class WatchCallBack  implements Watcher ,AsyncCallback.StatCallback, AsyncCallback.DataCallback {
+public class WatchCallBack implements Watcher, AsyncCallback.StatCallback, AsyncCallback.DataCallback {
 
-    ZooKeeper zk ;
-    MyConf conf ;
+    ZooKeeper zk;
+    MyConf conf;
     CountDownLatch cc = new CountDownLatch(1);
 
     public MyConf getConf() {
@@ -35,8 +35,8 @@ public class WatchCallBack  implements Watcher ,AsyncCallback.StatCallback, Asyn
     }
 
 
-    public void aWait(){
-        zk.exists("/AppConf",this,this ,"ABC");
+    public void aWait() {
+        zk.exists("/AppConf", this, this, "ABC");
         try {
             cc.await();
         } catch (InterruptedException e) {
@@ -47,7 +47,7 @@ public class WatchCallBack  implements Watcher ,AsyncCallback.StatCallback, Asyn
     @Override
     public void processResult(int rc, String path, Object ctx, byte[] data, Stat stat) {
 
-        if(data != null ){
+        if (data != null) {
             String s = new String(data);
             conf.setConf(s);
             cc.countDown();
@@ -58,8 +58,8 @@ public class WatchCallBack  implements Watcher ,AsyncCallback.StatCallback, Asyn
 
     @Override
     public void processResult(int rc, String path, Object ctx, Stat stat) {
-        if(stat != null){
-            zk.getData("/AppConf",this,this,"sdfs");
+        if (stat != null) {
+            zk.getData("/AppConf", this, this, "sdfs");
         }
 
     }
@@ -71,7 +71,7 @@ public class WatchCallBack  implements Watcher ,AsyncCallback.StatCallback, Asyn
             case None:
                 break;
             case NodeCreated:
-                zk.getData("/AppConf",this,this,"sdfs");
+                zk.getData("/AppConf", this, this, "sdfs");
 
                 break;
             case NodeDeleted:
@@ -80,7 +80,7 @@ public class WatchCallBack  implements Watcher ,AsyncCallback.StatCallback, Asyn
                 cc = new CountDownLatch(1);
                 break;
             case NodeDataChanged:
-                zk.getData("/AppConf",this,this,"sdfs");
+                zk.getData("/AppConf", this, this, "sdfs");
 
                 break;
             case NodeChildrenChanged:

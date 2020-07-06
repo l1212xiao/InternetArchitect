@@ -13,15 +13,15 @@ import org.junit.Test;
 public class TestLock {
 
 
-    ZooKeeper zk ;
+    ZooKeeper zk;
 
     @Before
-    public void conn (){
-        zk  = ZKUtils.getZK();
+    public void conn() {
+        zk = ZKUtils.getZK();
     }
 
     @After
-    public void close (){
+    public void close() {
         try {
             zk.close();
         } catch (InterruptedException e) {
@@ -30,10 +30,10 @@ public class TestLock {
     }
 
     @Test
-    public void lock(){
+    public void lock() {
 
         for (int i = 0; i < 10; i++) {
-            new Thread(){
+            new Thread() {
                 @Override
                 public void run() {
                     WatchCallBack watchCallBack = new WatchCallBack();
@@ -44,7 +44,7 @@ public class TestLock {
                     //抢锁
                     watchCallBack.tryLock();
                     //干活
-                    System.out.println(threadName+" working...");
+                    System.out.println(threadName + " working...");
 //                    try {
 //                        Thread.sleep(1000);
 //                    } catch (InterruptedException e) {
@@ -53,18 +53,13 @@ public class TestLock {
                     //释放锁
                     watchCallBack.unLock();
 
-
                 }
             }.start();
         }
-        while(true){
+        while (true) {
 
         }
 
-
     }
-
-
-
 
 }

@@ -1,6 +1,12 @@
 package org.ormtest.step050.entity;
 
-import javassist.*;
+// import javassist.*;
+
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtConstructor;
+import javassist.CtMethod;
+import javassist.CtNewMethod;
 
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
@@ -86,9 +92,9 @@ public final class EntityHelperFactory {
         // 生成以下代码:
         // UserEntity obj = new UserEntity();
         sb.append(entityClazz.getName())
-            .append(" obj = new ")
-            .append(entityClazz.getName())
-            .append("();\n");
+                .append(" obj = new ")
+                .append(entityClazz.getName())
+                .append("();\n");
 
 // 通过反射方式获取类的字段数组,
 // 并生成代码
@@ -114,18 +120,18 @@ public final class EntityHelperFactory {
                 // 生成如下代码 :
                 // obj._userId = rs.getInt("user_id");
                 sb.append("obj.")
-                    .append(f.getName())
-                    .append(" = rs.getInt(\"")
-                    .append(colName)
-                    .append("\");\n");
+                        .append(f.getName())
+                        .append(" = rs.getInt(\"")
+                        .append(colName)
+                        .append("\");\n");
             } else if (f.getType().equals(String.class)) {
                 // 生成如下代码 :
                 // obj._userName = rs.getString("user_name");
                 sb.append("obj.")
-                    .append(f.getName())
-                    .append(" = rs.getString(\"")
-                    .append(colName)
-                    .append("\");\n");
+                        .append(f.getName())
+                        .append(" = rs.getString(\"")
+                        .append(colName)
+                        .append("\");\n");
             } else {
                 // 不支持的类型...
             }
@@ -136,7 +142,7 @@ public final class EntityHelperFactory {
 
         // 创建解析方法
         CtMethod cm = CtNewMethod.make(
-            sb.toString(), helperClazz
+                sb.toString(), helperClazz
         );
         // 添加方法
         helperClazz.addMethod(cm);

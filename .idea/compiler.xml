@@ -6,16 +6,33 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="herostory (1)" />
+        <module name="herostory4" />
+        <module name="herostory (2)" />
+        <module name="ormtest" />
+        <module name="herostory (3)" />
         <module name="bigdata-redis" />
+        <module name="herostory (4)" />
+        <module name="bigdata-zookeeper" />
+        <module name="herostory" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="bigdata-redis" target="1.8" />
+      <module name="bigdata-zookeeper" target="1.8" />
+      <module name="herostory" target="1.8" />
+      <module name="herostory (1)" target="1.8" />
+      <module name="herostory (2)" target="1.8" />
+      <module name="herostory (3)" target="1.8" />
+      <module name="herostory (4)" target="1.8" />
+      <module name="herostory4" target="1.8" />
+      <module name="ormtest" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="bigdata-redis" options="-parameters" />
+      <module name="bigdata-zookeeper" options="-parameters" />
     </option>
   </component>
 </project>

@@ -50,8 +50,16 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/09 Redis/pom.xml" />
+        <option value="$PROJECT_DIR$/10 Zookeeper/pom.xml" />
+        <option value="$PROJECT_DIR$/14二期英雄传说/Java_游戏开发入门-第一课/herostory/pom.xml" />
+        <option value="$PROJECT_DIR$/14二期英雄传说/Java_游戏开发入门-第二课/herostory2/pom.xml" />
+        <option value="$PROJECT_DIR$/14二期英雄传说/Java_游戏开发入门-第三课/herostory3/pom.xml" />
+        <option value="$PROJECT_DIR$/14二期英雄传说/Java_游戏开发入门-第四课/herostory4/pom.xml" />
+        <option value="$PROJECT_DIR$/14二期英雄传说/Java_游戏开发入门-第四课/ormtest/pom.xml" />
+        <option value="$PROJECT_DIR$/14二期英雄传说/Java_游戏开发入门-第五课/herostory/pom.xml" />
+        <option value="$PROJECT_DIR$/14二期英雄传说/Java_游戏开发入门-第六课/herostory/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="jdk1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

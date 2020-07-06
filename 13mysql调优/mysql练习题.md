@@ -16,8 +16,8 @@ Score(s_id,c_id,s_score) –学生编号,课程编号,分数
 ### 2、测试数据
 
 ```sql
---建表
---学生表
+-- 建表
+-- 学生表
 CREATE TABLE `student`(
     `s_id` VARCHAR(20),
     `s_name` VARCHAR(20) NOT NULL DEFAULT '',
@@ -25,27 +25,27 @@ CREATE TABLE `student`(
     `s_sex` VARCHAR(10) NOT NULL DEFAULT '',
     PRIMARY KEY(`s_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
---课程表
+-- 课程表
 CREATE TABLE `course`(
     `c_id`  VARCHAR(20),
     `c_name` VARCHAR(20) NOT NULL DEFAULT '',
     `t_id` VARCHAR(20) NOT NULL,
     PRIMARY KEY(`c_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
---教师表
+-- 教师表
 CREATE TABLE `teacher`(
     `t_id` VARCHAR(20),
     `t_name` VARCHAR(20) NOT NULL DEFAULT '',
     PRIMARY KEY(`t_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
---成绩表
+-- 成绩表
 CREATE TABLE `score`(
     `s_id` VARCHAR(20),
     `c_id`  VARCHAR(20),
     `s_score` INT(3),
     PRIMARY KEY(`s_id`,`c_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
---插入学生表测试数据
+-- 插入学生表测试数据
 insert into student values('01' , '赵雷' , '1990-01-01' , '男');
 insert into student values('02' , '钱电' , '1990-12-21' , '男');
 insert into student values('03' , '孙风' , '1990-05-20' , '男');
@@ -54,15 +54,15 @@ insert into student values('05' , '周梅' , '1991-12-01' , '女');
 insert into student values('06' , '吴兰' , '1992-03-01' , '女');
 insert into student values('07' , '郑竹' , '1989-07-01' , '女');
 insert into student values('08' , '王菊' , '1990-01-20' , '女');
---课程表测试数据
+-- 课程表测试数据
 insert into course values('01' , '语文' , '02');
 insert into course values('02' , '数学' , '01');
 insert into course values('03' , '英语' , '03');
---教师表测试数据
+-- 教师表测试数据
 insert into teacher values('01' , '张三');
 insert into teacher values('02' , '李四');
 insert into teacher values('03' , '王五');
---成绩表测试数据
+-- 成绩表测试数据
 insert into score values('01' , '01' , 80);
 insert into score values('01' , '02' , 90);
 insert into score values('01' , '03' , 99);

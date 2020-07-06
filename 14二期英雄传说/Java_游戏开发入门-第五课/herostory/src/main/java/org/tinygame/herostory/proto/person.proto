@@ -1,0 +1,14 @@
+// person.proto  文件
+// package 请与需要使用语言的package目录一致
+
+syntax = "proto3";
+package org.tinygame.herostory.proto;
+
+message PersonMessage{
+  string id = 1;
+  string name = 2;
+  string sex = 3;
+  string address = 4;
+  int32 age = 5;
+  string phone = 6;
+}

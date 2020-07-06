@@ -11,17 +11,15 @@ import org.junit.Test;
  */
 public class TestConfig {
 
-
     ZooKeeper zk;
 
-
     @Before
-    public void conn (){
-        zk  = ZKUtils.getZK();
+    public void conn() {
+        zk = ZKUtils.getZK();
     }
 
     @After
-    public void close (){
+    public void close() {
         try {
             zk.close();
         } catch (InterruptedException e) {
@@ -29,9 +27,8 @@ public class TestConfig {
         }
     }
 
-
     @Test
-    public void getConf(){
+    public void getConf() {
 
         WatchCallBack watchCallBack = new WatchCallBack();
         watchCallBack.setZk(zk);
@@ -42,27 +39,23 @@ public class TestConfig {
         //1，节点不存在
         //2，节点存在
 
-        while(true){
+        while (true) {
 
-            if(myConf.getConf().equals("")){
+            if ("".equals(myConf.getConf())) {
                 System.out.println("conf diu le ......");
                 watchCallBack.aWait();
-            }else{
+            } else {
                 System.out.println(myConf.getConf());
 
             }
 
             try {
-                Thread.sleep(200);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
     }
-
-
-
-
 
 }
